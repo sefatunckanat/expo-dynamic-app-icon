@@ -1,10 +1,14 @@
-# 🎨 @g9k/expo-dynamic-app-icon
+# 🎨 @sefatunckanat/expo-dynamic-app-icon
 
 Easily **change your app icon dynamically** in **Expo SDK 52, 53 & 54**!
 
+> **⚠️ This is a fork with Kotlin 2.0+ compatibility fix**  
+> Original package: [@g9k/expo-dynamic-app-icon](https://github.com/g9kpl/expo-dynamic-app-icon)
+
 ## 📑 Table of Contents
 
-- [What's New](#-whats-new-in-this-fork)
+- [What's New in This Fork](#-whats-new-in-this-fork)
+- [Why This Fork?](#-why-this-fork)
 - [Features](#-features)
 - [Requirements](#️-requirements)
 - [Quick Start](#-quick-start)
@@ -18,7 +22,54 @@ Easily **change your app icon dynamically** in **Expo SDK 52, 53 & 54**!
 
 ## 🚀 **What's New in This Fork:**
 
-✨ **Available as an NPM package**
+### ✅ **Kotlin 2.0+ Compatibility Fixed**
+
+This fork fixes the critical Kotlin version compatibility issue that occurs when using the original package with Expo SDK 52+ and React Native 0.74+.
+
+**Changes Made:**
+
+- ✅ Updated `expo-modules-core` to `~3.0.22` (Kotlin 2.0+ support)
+- ✅ Added Kotlin compiler options to target JVM 11
+- ✅ Fixed incompatible Kotlin metadata version error
+- ✅ Fully compatible with Expo SDK 54 and React Native 0.81+
+
+---
+
+## 🤔 **Why This Fork?**
+
+### **The Problem**
+
+When using the original `@g9k/expo-dynamic-app-icon` (or `@howincodes/expo-dynamic-app-icon`) with modern Expo SDK 52+ projects, you would encounter this build error:
+
+```
+Execution failed for task ':expo-module-gradle-plugin:compileKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+e: Module was compiled with an incompatible version of Kotlin.
+   The binary version of its metadata is 2.1.0, expected version is 1.9.0.
+```
+
+### **The Root Cause**
+
+- Modern Expo SDK 52+ and React Native 0.74+ use **Kotlin 2.0+**
+- The original package was compiled with **Kotlin 1.9.0**
+- Gradle couldn't resolve this version mismatch
+
+### **The Solution**
+
+This fork updates the module's dependencies and Kotlin compiler configuration to be compatible with newer Expo and React Native versions, allowing seamless integration with Expo SDK 52, 53, and 54.
+
+### **Original Repository**
+
+This package is forked from [@g9k/expo-dynamic-app-icon](https://github.com/g9kpl/expo-dynamic-app-icon) by [Piotr Grzegorczyk](https://github.com/g9kpl).
+
+**Credits to the original authors:**
+
+- Piotr Grzegorczyk ([@g9kpl](https://github.com/g9kpl))
+- Based on work by [@howincodes](https://github.com/howincodes)
+
+---
 
 ## 🎁 **Features:**
 
@@ -47,7 +98,7 @@ Easily **change your app icon dynamically** in **Expo SDK 52, 53 & 54**!
 
 ```sh
 # 1. Install
-npx expo install @g9k/expo-dynamic-app-icon
+npx expo install @sefatunckanat/expo-dynamic-app-icon
 
 # 2. Add icons to your app.json (see Configuration below)
 
@@ -61,7 +112,7 @@ npx expo run:ios    # or npx expo run:android
 Then in your code:
 
 ```typescript
-import { setAppIcon, getAppIcon } from "@g9k/expo-dynamic-app-icon";
+import { setAppIcon, getAppIcon } from "@sefatunckanat/expo-dynamic-app-icon";
 
 // Change icon (use the names you configured in app.json)
 setAppIcon("blue");
@@ -73,6 +124,14 @@ const current = getAppIcon();
 ---
 
 ## 📦 Installation
+
+### **For Expo SDK 52+** (Recommended - with Kotlin 2.0+ fix)
+
+```sh
+npx expo install @sefatunckanat/expo-dynamic-app-icon
+```
+
+### **For Expo SDK 51 and below** (Use original package)
 
 ```sh
 npx expo install @g9k/expo-dynamic-app-icon
@@ -89,7 +148,7 @@ Add the plugin to your `app.json` or `app.config.js`:
 ```json
 "plugins": [
   [
-    "@g9k/expo-dynamic-app-icon",
+    "@sefatunckanat/expo-dynamic-app-icon",
     {
       "blue": {
         "ios": "./assets/ios_icon_blue.png",
@@ -222,7 +281,7 @@ Check if the following lines have been added to `android/app/src/main/AndroidMan
 ### **Set App Icon**
 
 ```typescript
-import { setAppIcon } from "@g9k/expo-dynamic-app-icon";
+import { setAppIcon } from "@sefatunckanat/expo-dynamic-app-icon";
 
 /**
  * Change app icon to 'blue'
@@ -266,7 +325,7 @@ setAppIcon(
 ### **Get Current Icon**
 
 ```typescript
-import { getAppIcon } from "@g9k/expo-dynamic-app-icon";
+import { getAppIcon } from "@sefatunckanat/expo-dynamic-app-icon";
 
 // Get the current app icon name
 const icon = getAppIcon();
@@ -297,13 +356,50 @@ console.log(icon); // "blue" or "red" or "purple" (or "DEFAULT" if not changed)
 
 ## 🔧 Troubleshooting
 
-### "Module not found" or import errors
+### Kotlin version compatibility error (FIXED in this fork!)
 
-**Problem:** Getting errors like `Cannot find module '@g9k/expo-dynamic-app-icon'`
+**Problem:** Build fails with Kotlin version mismatch error:
+
+```
+e: Module was compiled with an incompatible version of Kotlin. 
+   The binary version of its metadata is 2.1.0, expected version is 1.9.0.
+```
 
 **Solution:**
 
-1. Make sure you installed the package: `npx expo install @g9k/expo-dynamic-app-icon`
+✅ **This fork fixes this issue!** If you're using the original `@g9k/expo-dynamic-app-icon` or `@howincodes/expo-dynamic-app-icon` with Expo SDK 52+, switch to this package:
+
+```bash
+# Remove the old package
+yarn remove @g9k/expo-dynamic-app-icon
+# or
+yarn remove @howincodes/expo-dynamic-app-icon
+
+# Install this fixed version
+npx expo install @sefatunckanat/expo-dynamic-app-icon
+
+# Update your app.json plugin reference
+# Change "@g9k/expo-dynamic-app-icon" to "@sefatunckanat/expo-dynamic-app-icon"
+
+# Rebuild
+npx expo prebuild --clean
+npx expo run:android
+```
+
+**Why this happens:**
+- Expo SDK 52+ uses Kotlin 2.0+
+- The original package was compiled with Kotlin 1.9.0
+- This fork updates dependencies to be compatible with modern Expo versions
+
+---
+
+### "Module not found" or import errors
+
+**Problem:** Getting errors like `Cannot find module '@sefatunckanat/expo-dynamic-app-icon'`
+
+**Solution:**
+
+1. Make sure you installed the package: `npx expo install @sefatunckanat/expo-dynamic-app-icon`
 2. Clear cache: `npx expo start --clear`
 3. Rebuild the app: `npx expo run:ios` or `npx expo run:android`
 
