@@ -361,7 +361,7 @@ console.log(icon); // "blue" or "red" or "purple" (or "DEFAULT" if not changed)
 **Problem:** Build fails with Kotlin version mismatch error:
 
 ```
-e: Module was compiled with an incompatible version of Kotlin. 
+e: Module was compiled with an incompatible version of Kotlin.
    The binary version of its metadata is 2.1.0, expected version is 1.9.0.
 ```
 
@@ -387,6 +387,7 @@ npx expo run:android
 ```
 
 **Why this happens:**
+
 - Expo SDK 52+ uses Kotlin 2.0+
 - The original package was compiled with Kotlin 1.9.0
 - This fork updates dependencies to be compatible with modern Expo versions

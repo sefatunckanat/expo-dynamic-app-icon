@@ -13,12 +13,17 @@ The binary version of its metadata is 2.1.0, expected version is 1.9.0.
 ### Changes Made
 
 1. **Updated `expo-modules-core` dependency** (package.json)
-   - Changed from `^2.1.1` to `^3.0.0`
+   - Changed from `^2.1.1` to `~3.0.22`
    - Version 3.x supports Kotlin 2.0+ which is required by newer Expo and React Native versions
 
-2. **Updated Kotlin compiler options** (android/build.gradle)
-   - Added explicit Kotlin compiler configuration to ensure JVM 11 target compatibility
-   - This ensures the module compiles with the same Kotlin version as your Expo project
+2. **Updated Kotlin and Java compiler options** (android/build.gradle)
+   - Added explicit Kotlin compiler configuration targeting JVM 17
+   - Added Java compile options to match JVM 17
+   - This ensures the module compiles with the same Kotlin version and JVM target as your Expo project
+
+3. **JVM Target Compatibility**
+   - Both Java and Kotlin now target JVM 17 (required for Expo SDK 54+)
+   - Resolves "Inconsistent JVM-target compatibility" errors
 
 ### Installation
 
